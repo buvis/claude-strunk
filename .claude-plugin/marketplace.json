@@ -8,7 +8,7 @@
     {
       "name": "strunk",
       "description": "Idiomatic patterns and disciplined testing for Python, Rust, and Svelte",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "author": {
         "name": "buvis"
       },
