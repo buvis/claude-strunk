@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `apply-design-system` — framework-agnostic visual-craft skill with three modes: generate design tokens from existing code + competitor research, score UI 0-10 across ten dimensions (color, typography, spacing, responsiveness, accessibility, polish, ...), and detect generic AI-design patterns (gratuitous gradients, purple-to-blue defaults, purposeless glass morphism). Pairs with `frontend-patterns`: one shapes the code, the other shapes what you see.
+
 ## [0.1.0] - 2026-05-11
 
 ### Added

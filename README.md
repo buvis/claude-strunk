@@ -17,6 +17,7 @@ Code-craft skills for [Claude Code](https://claude.ai/code). Idiomatic patterns 
 | `frontend-patterns` | Editing `.svelte`; "svelte", "sveltekit", "runes" |
 | `e2e-testing` | "playwright", "e2e test" |
 | `check-python-compat` | "check python compat", "python 3.10 compatible" |
+| `apply-design-system` | "design system", "visual audit", "slop check" — framework-agnostic counterpart to `frontend-patterns` |
 
 Each skill ships with a `references/` folder of topic-specific deep dives (idioms, error handling, fixtures, mocking, ownership, parameterized tests, ...) that Claude pulls in only when needed. No always-on context cost.
 
