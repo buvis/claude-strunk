@@ -32,6 +32,10 @@ Idiomatic Python patterns and best practices. Read relevant references based on 
 | `pathlib.Path` | For path operations (3.4+) |
 | `enumerate` | For index-element pairs in loops |
 
+## Naming (PEP 8)
+
+`snake_case` for modules, functions, variables. `CapWords` for classes. `UPPER_SNAKE_CASE` for constants. **Never name a `.py` file with kebab-case** - it isn't importable. See `references/project-structure.md` for the full table.
+
 ## Anti-Patterns
 
 ```python
@@ -51,4 +55,8 @@ if value == None:  # use: if value is None:
 # from module import *  — use explicit imports
 
 # type() instead of isinstance()
+
+# Kebab-case file name
+# my-script.py  →  not importable (import my-script is a SyntaxError)
+# Fix: my_script.py
 ```

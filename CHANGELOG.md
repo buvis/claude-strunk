@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **python-patterns**: PEP 8 naming-convention table (modules, classes, functions, constants) with an explicit rule that `.py` files must use snake_case, never kebab-case (kebab-cased modules are not importable).
+
 ## [0.1.1] - 2026-05-11
 
 ### Added

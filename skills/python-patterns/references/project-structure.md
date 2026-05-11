@@ -1,5 +1,21 @@
 # Package Organization and Tooling
 
+## Naming Conventions (PEP 8)
+
+| Kind | Convention | Example |
+|------|------------|---------|
+| Module / script file | `snake_case.py` | `data_loader.py`, `cli_runner.py` |
+| Package directory | `lowercase` (avoid underscores) | `mypackage/`, `utils/` |
+| Class | `CapWords` | `HttpClient`, `UserRepository` |
+| Function / method / variable | `snake_case` | `parse_config`, `retry_count` |
+| Constant | `UPPER_SNAKE_CASE` | `MAX_RETRIES`, `DEFAULT_TIMEOUT` |
+| Type variable | `CapWords`, short | `T`, `KT`, `UserT` |
+| "Internal" name | leading underscore | `_helper`, `_cache` |
+| "Name-mangled" attr | double leading underscore | `__private` |
+| Dunder | double leading + trailing | `__init__`, `__repr__` |
+
+Never use kebab-case for `.py` files - `my-script.py` is not importable (`import my-script` is a syntax error). Use `my_script.py`. The only place kebab-case belongs in a Python project is the distribution name in `pyproject.toml` (`name = "my-package"`) and the CLI entry-point command itself (`my-tool`), both of which map to a `my_package` / `my_tool` importable module.
+
 ## Standard Project Layout
 
 ```
