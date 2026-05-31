@@ -5,58 +5,44 @@ description: Use when writing, reviewing, or refactoring Python code. Triggers o
 
 # Python Patterns
 
-Idiomatic Python patterns and best practices. Read relevant references based on the task.
+Pick a side. These are the rulings, not a tutorial.
 
-## References
+## Idioms that earn their place
 
-- `references/idioms.md` - Core idioms: EAFP, comprehensions, generators, context managers
-- `references/type-hints.md` - Type annotations, Protocol, TypeVar, modern syntax (3.9+)
-- `references/error-handling.md` - Exception hierarchy, chaining, specific catches
-- `references/data-modeling.md` - Dataclasses, NamedTuple, __slots__, performance
-- `references/concurrency.md` - Threading, multiprocessing, async/await
-- `references/decorators.md` - Function, parameterized, and class-based decorators
-- `references/project-structure.md` - Package layout, imports, pyproject.toml, tooling
-
-## Quick Reference
-
-| Idiom | Description |
-|-------|-------------|
-| EAFP | Try/except over if/else checks |
-| Context managers | `with` for resource management |
-| List comprehensions | For simple transformations |
-| Generators | For lazy evaluation and large datasets |
-| Type hints | Annotate function signatures |
-| Dataclasses | For data containers with auto-generated methods |
-| `__slots__` | For memory optimization |
-| f-strings | For string formatting (3.6+) |
-| `pathlib.Path` | For path operations (3.4+) |
-| `enumerate` | For index-element pairs in loops |
+| Rule | Why |
+|------|-----|
+| `X \| Y`, not `Union[X, Y]` | 3.10+ runtime syntax; clearer. On 3.9 it parses only under `from __future__ import annotations` and still breaks `get_type_hints`/`isinstance` — keep `Optional`/`Union` if you support 3.9. |
+| `Protocol`, not `ABC`, for duck typing | Structural typing; no inheritance you don't control. |
+| `dataclass` for mutable records, `NamedTuple` for immutable lightweight rows | Pydantic only when you need validation. |
+| `raise New(...) from e` | Marks the explicit cause. A bare `raise New()` still chains implicitly ("During handling..."); use `from None` to suppress. |
+| `@functools.wraps` on every decorator | Without it the wrapper loses `__name__`, `__doc__`, signature. |
+| `pathlib.Path`, not `os.path` | One object, no string surgery. |
 
 ## Naming (PEP 8)
 
-`snake_case` for modules, functions, variables. `CapWords` for classes. `UPPER_SNAKE_CASE` for constants. **Never name a `.py` file with kebab-case** - it isn't importable. See `references/project-structure.md` for the full table.
+`snake_case` for modules, functions, variables. `CapWords` for classes. `UPPER_SNAKE_CASE` for constants. Leading `_` for internal names.
 
-## Anti-Patterns
+**Never name a `.py` file in kebab-case.** `my-script.py` is not importable (`import my-script` is a `SyntaxError`). Kebab-case belongs only in the `pyproject.toml` distribution name and the CLI command, both of which map to a `snake_case` module.
+
+## Traps
 
 ```python
-# Mutable default arguments
-def bad(items=[]):  # shared across calls
+# Mutable default argument — shared across calls
+def bad(items=[]): ...
 def good(items=None):
-    items = items if items is not None else []
+    items = [] if items is None else items
 
-# Bare except
+# Bare except — swallows SystemExit, KeyboardInterrupt
 try: ...
-except: pass  # catches SystemExit, KeyboardInterrupt
-# Fix: except SpecificError as e:
+except Exception as e: ...        # name the exception
 
-# Comparing to None with ==
-if value == None:  # use: if value is None:
+# __slots__ kills __dict__ and dynamic attributes — use only on fixed,
+# memory-sensitive classes you won't extend.
 
-# from module import *  — use explicit imports
+# __double_leading is name-mangled to _Class__double_leading.
+# Surprises you in subclasses, pickling, and monkey-patching.
 
-# type() instead of isinstance()
-
-# Kebab-case file name
-# my-script.py  →  not importable (import my-script is a SyntaxError)
-# Fix: my_script.py
+if value is None: ...             # never == None
 ```
+
+Avoid `from module import *`. Use `isinstance`, never `type(x) ==`.

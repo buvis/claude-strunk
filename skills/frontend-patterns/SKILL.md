@@ -5,36 +5,32 @@ description: Use when building Svelte 5 / SvelteKit components. Covers runes, re
 
 # Frontend Patterns
 
-Svelte 5 and SvelteKit patterns. Read relevant references based on the task.
+Svelte 5 and SvelteKit. Pick a side.
 
-## References
-
-- `references/components.md` - Slots, snippets, compound components, headless/renderless
-- `references/reactivity.md` - $state, $derived, $effect, stores, class-based state
-- `references/data-loading.md` - Server load functions, streaming, SvelteKit form actions
-- `references/performance.md` - Fine-grained reactivity, code splitting, virtualization, error boundaries
-- `references/animations.md` - Transitions, spring/tweened motion, custom transitions
-- `references/actions-a11y.md` - Svelte actions (clickOutside, trapFocus), keyboard nav, focus management
-
-## Key Svelte 5 Patterns
+## Runes
 
 ```svelte
-<!-- Reactive state -->
 let count = $state(0)
 let doubled = $derived(count * 2)
-
-<!-- Side effects with cleanup -->
-$effect(() => {
-  const id = setInterval(tick, 1000)
-  return () => clearInterval(id)
-})
-
-<!-- Props -->
+$effect(() => { const id = setInterval(tick, 1000); return () => clearInterval(id) })
 let { items, variant = 'default' }: Props = $props()
-
-<!-- Snippets (replaces slots) -->
-{#snippet header()}...{/snippet}
-{@render header()}
+{#snippet header()}...{/snippet}  {@render header()}
 ```
 
-Svelte's compiler-driven reactivity eliminates most manual optimization. Use stores/context when state crosses component boundaries; keep local state with runes.
+- **Derive with `$derived`, never `$effect`.** Using `$effect` to compute state from state is the #1 Svelte 5 footgun — it cascades and desyncs. `$effect` is for side effects (DOM, subscriptions, timers) only.
+- `$derived.by(() => {...})` when the computation needs a block, not an expression.
+- No memoization helpers. Runes are fine-grained by default; `$derived` is your `useMemo`.
+- Shared state: a class with `$state` fields (`export class Cart { items = $state([]) }`) reads cleaner than stores. Stores/context only when state must cross many component boundaries.
+- Snippets replace slots. Reach for slots only for legacy interop.
+- Debounce with two values (`query` + `debounced`) and a small `$effect`, not by debouncing inside the render path.
+
+## Data loading
+
+- Server `load` in `+page.server.ts` for data; **form actions with `<form method="POST" use:enhance>`** for mutations, not hand-rolled client `fetch`. Native forms survive JS failures.
+- Stream slow data by returning unresolved promises from `load` and awaiting them in `{#await}`.
+
+## Performance & a11y (non-negotiable)
+
+- Virtualize (`@tanstack/svelte-virtual`) past ~100 rows or tall items — reactivity alone won't save a giant list.
+- Lazy-load heavy libs (charts, editors) via dynamic `import()` in an `$effect`; show a skeleton meanwhile.
+- Modals: `role="dialog"` + `aria-modal="true"`, a `trapFocus` action (Tab wraps), Escape to close, `clickOutside`, and **restore focus** to the trigger on close. Save `previousFocus` before opening.

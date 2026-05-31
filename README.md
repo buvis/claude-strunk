@@ -19,7 +19,7 @@ Code-craft skills for [Claude Code](https://claude.ai/code). Idiomatic patterns 
 | `check-python-compat` | "check python compat", "python 3.10 compatible" |
 | `apply-design-system` | "design system", "visual audit", "slop check" — framework-agnostic counterpart to `frontend-patterns` |
 
-Each skill ships with a `references/` folder of topic-specific deep dives (idioms, error handling, fixtures, mocking, ownership, parameterized tests, ...) that Claude pulls in only when needed. No always-on context cost.
+Each skill is one tight file: an opinion table plus the handful of rules that override a model default or flag a real trap. No textbook restatement of things Claude already does. (`check-python-compat` keeps a version-compatibility reference table, the one place a lookup table earns its keep.)
 
 ## Install
 

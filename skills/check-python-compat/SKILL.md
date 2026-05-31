@@ -5,7 +5,7 @@ description: Use when checking Python code for version-compatibility issues targ
 
 # Check Python Version Compatibility
 
-Reference for writing Python code that works across 3.10–3.12. Consult `references/compat-table.md` for the full list.
+Reference for writing Python code that works across 3.10–3.13. Consult `references/compat-table.md` for the full list.
 
 ## Workflow
 

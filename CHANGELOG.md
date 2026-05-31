@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Collapsed every skill to a single opinionated file. Reference folders that re-taught Python/Rust/Svelte basics the model already knows are gone; what remains is the rulings that override a default or flag a real trap. `check-python-compat` keeps its compatibility table.
+- **e2e-testing**: trimmed to the durable Playwright core (POM, config defaults, flaky-test strategy) and removed app-specific Web3/wallet and financial-trade examples that didn't belong in a general skill.
+
+### Fixed
+
+- Fact-checked every ruling against current docs and corrected the confirmed errors: `page.click()` does auto-wait (the prior text claimed it didn't); `criterion::black_box` is deprecated in favor of `std::hint::black_box`; a bare `raise New()` still chains the traceback implicitly; the `X | Y` 3.9 fallback caveat; `thiserror`/`anyhow` is not a hard library-vs-app split. Switched Playwright selectors to `getByTestId()`, added the pytest-asyncio `strict`-mode gotcha, and fixed the `check-python-compat` scope (3.10–3.13) and a mislabeled removed-modules row.
+
 ## [0.1.2] - 2026-05-11
 
 ### Added

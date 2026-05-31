@@ -1,4 +1,4 @@
-# Python 3.10–3.12 Compatibility Table
+# Python 3.10–3.13 Compatibility Table
 
 ## Added in 3.11 (unavailable on 3.10)
 
@@ -63,7 +63,6 @@
 | `asyncore` | `asyncio` |
 | `imp` | `importlib` |
 | `smtpd` | `aiosmtpd` |
-| `lib2to3` / `2to3` | manual migration |
 
 ### Deprecated in 3.12 (still works but warns)
 | Feature | Alternative |
@@ -96,11 +95,13 @@
 | Locally-defined models | Pydantic can't resolve forward refs for models defined inside functions on 3.10. Define at module level. |
 | `list[X]` as type | `isinstance(list[X], type)` differs across versions. Always use `get_origin()` to check parameterized generics. |
 
-## Modules deprecated in 3.11, removed in 3.13
-These work on 3.11/3.12 but emit warnings:
-`aifc`, `audioop`, `cgi`, `cgitb`, `chunk`, `crypt`, `imghdr`, `mailcap`, `msilib`, `nis`, `nntplib`, `ossaudiodev`, `pipes`, `sndhdr`, `spwd`, `sunau`, `telnetlib`, `uu`, `xdrlib`
+## Removed in 3.13 (work on 3.11/3.12 but emit warnings there)
 
-## Safe patterns across 3.10–3.12
+PEP 594 "dead battery" modules: `aifc`, `audioop`, `cgi`, `cgitb`, `chunk`, `crypt`, `imghdr`, `mailcap`, `msilib`, `nis`, `nntplib`, `ossaudiodev`, `pipes`, `sndhdr`, `spwd`, `sunau`, `telnetlib`, `uu`, `xdrlib`.
+
+Also removed in 3.13: `lib2to3` / `2to3` (deprecated 3.11) — manual migration.
+
+## Safe patterns across 3.10–3.13
 
 ```python
 # TOML parsing
