@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-05-31
+
 ### Changed
 
 - Collapsed every skill to a single opinionated file. Reference folders that re-taught Python/Rust/Svelte basics the model already knows are gone; what remains is the rulings that override a default or flag a real trap. `check-python-compat` keeps its compatibility table.
