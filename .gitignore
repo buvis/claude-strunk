@@ -14,3 +14,6 @@ htmlcov/
 # Claude Code local settings
 .claude/
 .local/
+
+# Working documents
+dev/local/
