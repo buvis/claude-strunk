@@ -1,4 +1,6 @@
-# Python 3.10–3.13 Compatibility Table
+# Python 3.10–3.14 Compatibility Table
+
+Verified against Python 3.14, 2026-06-09. Python 3.10 reaches end-of-life in October 2026 and remains the correct floor until then.
 
 ## Added in 3.11 (unavailable on 3.10)
 
@@ -95,13 +97,55 @@
 | Locally-defined models | Pydantic can't resolve forward refs for models defined inside functions on 3.10. Define at module level. |
 | `list[X]` as type | `isinstance(list[X], type)` differs across versions. Always use `get_origin()` to check parameterized generics. |
 
+## Added in 3.14 (unavailable on 3.10, 3.11, 3.12, 3.13)
+
+### New syntax
+| Feature | pre-3.14 alternative |
+|---------|----------------------|
+| `t"..."` template strings (PEP 750) — `t` prefix returns `string.templatelib.Template` preserving static parts and interpolations separately | No backport; use f-strings or explicit string building |
+| `SyntaxWarning` for `return`/`break`/`continue` leaving a `finally` block (PEP 765) | Code that does this already silently misbehaves on all versions; warning is new in 3.14 |
+
+### New modules
+| Module | Purpose | pre-3.14 alternative |
+|--------|---------|----------------------|
+| `annotationlib` | Introspect deferred annotations (PEP 749); `Format.VALUE`, `Format.FORWARDREF`, `Format.STRING` | `typing.get_type_hints()` |
+| `compression` | Package re-exporting `lzma`, `bz2`, `gzip`, `zlib` under canonical names (old names not deprecated) | Import from original module names |
+| `compression.zstd` | Zstandard compression/decompression (PEP 784) | `zstandard` PyPI package |
+| `concurrent.interpreters` | Multiple Python interpreters in same process for true multi-core parallelism (PEP 734) | `multiprocessing` for parallelism |
+| `string.templatelib` | Runtime types for t-string objects (`Template`, `Interpolation`) | No equivalent |
+
+### Removed APIs
+| Removed | Deprecated since | Alternative |
+|---------|-----------------|-------------|
+| `ast.Bytes`, `ast.Ellipsis`, `ast.NameConstant`, `ast.Num`, `ast.Str` | 3.8 (warnings since 3.12) | `ast.Constant`; replace `visit_Num` etc. with `visit_Constant` |
+| `ast.Constant.n`, `ast.Constant.s` | 3.12 | `ast.Constant.value` |
+| `asyncio` child watcher API (`AbstractChildWatcher`, `FastChildWatcher`, `PidfdChildWatcher`, `SafeChildWatcher`, `ThreadedChildWatcher`, `get_child_watcher()`, `set_child_watcher()`) | 3.12 | Child watcher concept removed; no direct replacement |
+| `pkgutil.get_loader()`, `pkgutil.find_loader()` | 3.12 | `importlib.util.find_spec()` |
+
+### Behavioral changes
+| Behavior | Before 3.14 | In 3.14 | Safe fallback |
+|----------|------------|---------|---------------|
+| Annotations evaluation | Eager at definition time (unless `from __future__ import annotations`) | Deferred by default — stored in annotate functions, evaluated only on demand | Use `typing.get_type_hints()` for runtime access on all versions |
+| `asyncio.get_event_loop()` with no current loop | Implicitly created a new loop | Raises `RuntimeError` | Use `asyncio.run()` instead |
+| `multiprocessing` default start method on Linux/non-macOS Unix | `'fork'` | `'forkserver'` | Explicitly call `multiprocessing.set_start_method('fork')` or `get_context('fork')` |
+| `ProcessPoolExecutor` default start method (Linux/non-macOS Unix) | `'fork'` | `'forkserver'` | Pass `mp_context=multiprocessing.get_context('fork')` |
+| `functools.partial` in class body | Not a method descriptor | Now a method descriptor — behaves like a bound method | Wrap with `staticmethod()` to preserve old behavior |
+| `typing.Union` / `types.UnionType` identity | Two separate types; cached, `Union[int,str] is Union[int,str]` was `True` | `types.UnionType` is alias for `typing.Union`; unions no longer cached | Use `==` not `is` for union comparison on all versions |
+| `repr(Union[int, str])` | `"typing.Union[int, str]"` | `"int \| str"` | Don't rely on repr for type comparison |
+
+### Typing additions
+| Feature | pre-3.14 alternative |
+|---------|----------------------|
+| `annotationlib` with `Format.VALUE`, `Format.FORWARDREF`, `Format.STRING` for controlled annotation evaluation | `typing.get_type_hints()` with `include_extras=True` |
+| `types.UnionType` is alias for `typing.Union` — `X \| Y` and `Union[X, Y]` produce the same runtime type | Use `get_origin(tp) is Union` to test |
+
 ## Removed in 3.13 (work on 3.11/3.12 but emit warnings there)
 
 PEP 594 "dead battery" modules: `aifc`, `audioop`, `cgi`, `cgitb`, `chunk`, `crypt`, `imghdr`, `mailcap`, `msilib`, `nis`, `nntplib`, `ossaudiodev`, `pipes`, `sndhdr`, `spwd`, `sunau`, `telnetlib`, `uu`, `xdrlib`.
 
 Also removed in 3.13: `lib2to3` / `2to3` (deprecated 3.11) — manual migration.
 
-## Safe patterns across 3.10–3.13
+## Safe patterns across 3.10–3.14
 
 ```python
 # TOML parsing
