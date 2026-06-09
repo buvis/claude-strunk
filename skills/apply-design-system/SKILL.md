@@ -20,7 +20,7 @@ Competitor research is optional, not a gate. Use a browser MCP if one is present
 
 ## Audit
 
-Score each axis 0-10. A score with no `file:line` example and an exact fix is an opinion, not an audit. Anything below 8 ships a concrete change.
+Score each axis 0-10. Every score cites a `file:line` example as evidence; a score without one is an opinion, not an audit. Anything below 8 also ships an exact fix.
 
 The axes that earn their keep:
 
