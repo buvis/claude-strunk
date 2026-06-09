@@ -3,56 +3,42 @@ name: apply-design-system
 description: Use when generating a design system, auditing visual consistency, or checking for generic AI-design patterns. Three modes (generate tokens, UI scoring 0-10, slop detection). Triggers on "design system", "visual audit", "slop check".
 ---
 
-# Apply Design System — Generate & Audit Visual Systems
+# Apply Design System
 
-## Mode 1: Generate Design System
+Pick a side. These are the rulings, not a tutorial. Framework-agnostic — the visual half that `frontend-patterns` (Svelte specifics) leaves open. Three jobs: generate a token set, audit a UI, or catch AI slop.
 
-Analyzes your codebase and generates a cohesive design system:
+## Generate
 
-```
-1. Scan CSS/Tailwind/styled-components for existing patterns
-2. Extract: colors, typography, spacing, border-radius, shadows, breakpoints
-3. Research 3 competitor sites for inspiration (via browser MCP)
-4. Propose a design token set (JSON + CSS custom properties)
-5. Generate DESIGN.md with rationale for each decision
-6. Create an interactive HTML preview page (self-contained, no deps)
-```
+| Rule | Why |
+|------|-----|
+| Extract before you invent | Read existing CSS/Tailwind/styled-components first; the codebase is the source of truth, not your taste. |
+| One scale per axis | Spacing on a 4px/8px step, type on a modular scale. No arbitrary values. |
+| Name by role, not value | `--color-surface`, not `--color-gray-100`. Values change; roles don't. |
+| Ship three artifacts | `design-tokens.json`, CSS custom properties, and a `DESIGN.md` stating the rationale for each decision. |
 
-Output: `DESIGN.md` + `design-tokens.json` + `design-preview.html`
+Competitor research is optional, not a gate. Use a browser MCP if one is present; when none is available, work from the codebase and the brief alone — never block on a tool that isn't there.
 
-### Mode 2: Visual Audit
+## Audit
 
-Scores your UI across 10 dimensions (0-10 each):
+Score each axis 0-10. A score with no `file:line` example and an exact fix is an opinion, not an audit. Anything below 8 ships a concrete change.
 
-```
-1. Color consistency — are you using your palette or random hex values?
-2. Typography hierarchy — clear h1 > h2 > h3 > body > caption?
-3. Spacing rhythm — consistent scale (4px/8px/16px) or arbitrary?
-4. Component consistency — do similar elements look similar?
-5. Responsive behavior — fluid or broken at breakpoints?
-6. Dark mode — complete or half-done?
-7. Animation — purposeful or gratuitous?
-8. Accessibility — contrast ratios, focus states, touch targets
-9. Information density — cluttered or clean?
-10. Polish — hover states, transitions, loading states, empty states
-```
+The axes that earn their keep:
 
-Each dimension gets a score, specific examples, and a fix with exact file:line.
+- **Token adherence** — your palette and scale, or scattered hex and magic numbers?
+- **Type hierarchy** — clear h1 > h2 > body > caption, or flat?
+- **Spacing rhythm** — one scale, or arbitrary gaps?
+- **Component consistency** — do similar elements look similar?
+- **Responsive integrity** — fluid, or broken at breakpoints?
+- **State coverage** — hover, focus, loading, empty, error all handled?
+- **Accessibility** — contrast ratios, focus rings, touch targets.
 
-### Mode 3: AI Slop Detection
+## Slop check
 
-Identifies generic AI-generated design patterns:
+Flag and kill the generic AI-design tells:
 
-```
-- Gratuitous gradients on everything
-- Purple-to-blue defaults
-- "Glass morphism" cards with no purpose
-- Rounded corners on things that shouldn't be rounded
-- Excessive animations on scroll
-- Generic hero with centered text over stock gradient
-- Sans-serif font stack with no personality
-```
-
-## Usage
-
-Invoke with `/apply-design-system` and specify which mode: generate, audit, or slop-check. Provide context about the project (tech stack, target aesthetic) for best results.
+- Purple-to-blue gradient as the default on everything.
+- Glassmorphism cards with no depth purpose.
+- Rounded corners on elements that read as flat (tables, code blocks).
+- Scroll-triggered animation that delays the content.
+- Centered hero text over a stock gradient.
+- A personality-free sans stack picked by default.
