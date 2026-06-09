@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **apply-design-system**: rewrote into the rulings house style to match the other skills, and fixed three defects: the skipped heading level between modes, the false `/apply-design-system` slash-command instruction, and the hard browser-MCP dependency in competitor research (now optional, with a codebase-only fallback).
+- **check-python-compat**: extended the compatibility reference through Python 3.14 (was 3.10-3.13) and added a freshness stamp, so a reader can tell at a glance whether it covers the current Python.
 
 ## [0.1.3] - 2026-05-31
 
