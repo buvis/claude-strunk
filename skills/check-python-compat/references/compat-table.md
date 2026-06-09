@@ -136,8 +136,7 @@ Verified against Python 3.14, 2026-06-09. Python 3.10 reaches end-of-life in Oct
 ### Typing additions
 | Feature | pre-3.14 alternative |
 |---------|----------------------|
-| `annotationlib` with `Format.VALUE`, `Format.FORWARDREF`, `Format.STRING` for controlled annotation evaluation | `typing.get_type_hints()` with `include_extras=True` |
-| `types.UnionType` is alias for `typing.Union` — `X \| Y` and `Union[X, Y]` produce the same runtime type | Use `get_origin(tp) is Union` to test |
+| `annotationlib` with `Format.VALUE`, `Format.FORWARDREF`, `Format.STRING` for controlled annotation evaluation | `typing.get_type_hints()` |
 
 ## Removed in 3.13 (work on 3.11/3.12 but emit warnings there)
 
