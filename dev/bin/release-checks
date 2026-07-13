@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Pre-release checks for strunk: every skill ships a SKILL.md.
+# Run by claude-plugins/scripts/release-plugin with CWD = repo root.
+set -euo pipefail
+
+for skill_dir in skills/*/; do
+  [ -f "$skill_dir/SKILL.md" ] || { echo "Error: $skill_dir missing SKILL.md" >&2; exit 1; }
+done

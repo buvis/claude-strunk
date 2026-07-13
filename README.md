@@ -49,6 +49,20 @@ Restart Claude Code. The skills auto-trigger from file extensions and conversati
 
 If you've never read it, the irony is intentional.
 
+## Releasing
+
+`dev/bin/release [patch|minor|major]` is a thin shim. The shared release
+script lives in the central marketplace repo,
+[buvis/claude-plugins](https://github.com/buvis/claude-plugins), and every
+release also bumps this plugin's entry there. Developing this plugin
+therefore needs that repo cloned beside this one:
+
+```bash
+git clone git@github.com:buvis/claude-plugins.git ../claude-plugins
+```
+
+Repo-specific pre-release checks live in `dev/bin/release-checks`.
+
 ## License
 
 MIT
