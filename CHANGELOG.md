@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-07-13
+
 ### Changed
 
 - **apply-design-system**: rewrote into the rulings house style to match the other skills, and fixed three defects: the skipped heading level between modes, the false `/apply-design-system` slash-command instruction, and the hard browser-MCP dependency in competitor research (now optional, with a codebase-only fallback).
