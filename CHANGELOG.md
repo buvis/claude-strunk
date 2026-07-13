@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-07-13
+
 ### Added
 
 - **web-patterns**: the framework-agnostic web lane strunk was missing. CSS units (never px for sizing), design tokens as custom properties, compositor-only animation, semantic HTML, component composition, state management, and data fetching. Fires on `.css`/`.html`/`.ts`/`.tsx`/`.vue` edits — the ground `frontend-patterns` (Svelte-only) never covered.

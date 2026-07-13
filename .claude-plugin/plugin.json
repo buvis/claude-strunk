@@ -1,6 +1,6 @@
 {
   "name": "strunk",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Code-craft skills for Claude Code. Idiomatic patterns and disciplined testing for Python, Rust, and Svelte. Named after Strunk & White's Elements of Style: opinionated, principled, prose-quality care for code.",
   "author": {
     "name": "buvis"
