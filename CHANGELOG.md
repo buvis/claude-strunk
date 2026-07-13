@@ -7,17 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **CHANGELOG**: corrected the v0.2.0 claim that the language rulings now have "exactly one home" — the `~/.claude/rules/{python,rust,web}/` deletion was cancelled after a live probe showed rules files always attach while skills self-invoke only 1 time in 30; the rules tree remains the delivering surface until hook-based delivery lands, and strunk carries a released, portable copy.
+- **README**: stopped promising the skills "auto-trigger from file extensions" — skills are model-invoked and firing is not guaranteed; softened to describe trigger phrases honestly.
+- **web-patterns**: README and CHANGELOG extension lists now include `.svelte`, matching the skill's own frontmatter.
+- **web-security**, **web-performance**: added a file-edit trigger (`.css`/`.svelte`/`.ts`/`.tsx`/`.jsx`/`.html`/`.vue`) — previously fired only on explicit acronyms, unlike the path-scoped rules they absorbed.
+- **apply-design-system**: replaced the vague "frontend file edits" trigger with an explicit extension list.
+
+### Changed
+
+- **web-patterns**: added `.jsx` to the trigger extension list — every source `rules/web/*.md` globbed `**/*.jsx`, so a plain-JSX React repo now has a successor lane.
+- **plugin.json**, **marketplace.json**: description now says "Python, Rust, and the web" instead of "Python, Rust, and Svelte", reflecting the v0.2.0 web lane.
+- **python-testing**: collapsed the three overlapping Config bullets on `--strict-markers` and marker registration into two.
+
 ## [0.2.0] - 2026-07-13
 
 ### Added
 
-- **web-patterns**: the framework-agnostic web lane strunk was missing. CSS units (never px for sizing), design tokens as custom properties, compositor-only animation, semantic HTML, component composition, state management, and data fetching. Fires on `.css`/`.html`/`.ts`/`.tsx`/`.vue` edits — the ground `frontend-patterns` (Svelte-only) never covered.
+- **web-patterns**: the framework-agnostic web lane strunk was missing. CSS units (never px for sizing), design tokens as custom properties, compositor-only animation, semantic HTML, component composition, state management, and data fetching. Fires on `.css`/`.svelte`/`.ts`/`.tsx`/`.html`/`.vue` edits — the ground `frontend-patterns` (Svelte-only) never covered.
 - **web-security**: nonce-based CSP, security headers, XSS, third-party scripts and SRI, form CSRF and rate limiting.
 - **web-performance**: Core Web Vitals targets, bundle budgets, loading strategy, image and font rules.
 
 ### Changed
 
-- **python-patterns**, **python-testing**, **rust-patterns**, **rust-testing**, **e2e-testing**, **apply-design-system**, **frontend-patterns**: absorbed the language guidance that previously lived in a parallel `~/.claude/rules/{python,rust,web}/` tree, so each topic now has exactly one home. New ground includes the Python toolchain and security rulings, the Rust naming table, module layout, `&str`/`&[T]` parameter and `Send + Sync` repository rulings, the cargo command reference, the macOS/maturin codesign trap, the "what to test, in priority order" list, and the design quality gate (4 of 10 required qualities). `apply-design-system` and `e2e-testing` gained triggers so the absorbed lanes are reachable.
+- **python-patterns**, **python-testing**, **rust-patterns**, **rust-testing**, **e2e-testing**, **apply-design-system**, **frontend-patterns**: absorbed the language guidance also carried in the `~/.claude/rules/{python,rust,web}/` tree, so strunk now ships a released, portable copy of the rulings. That rules tree remains the delivering surface until hook-based delivery lands — the two are not yet a single home. New ground includes the Python toolchain and security rulings, the Rust naming table, module layout, `&str`/`&[T]` parameter and `Send + Sync` repository rulings, the cargo command reference, the macOS/maturin codesign trap, the "what to test, in priority order" list, and the design quality gate (4 of 10 required qualities). `apply-design-system` and `e2e-testing` gained triggers so the absorbed lanes are reachable.
 
 ## [0.1.4] - 2026-07-13
 

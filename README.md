@@ -15,7 +15,7 @@ Code-craft skills for [Claude Code](https://claude.ai/code). Idiomatic patterns 
 | `rust-patterns` | Editing Rust; "idiomatic rust", "rust best practices" |
 | `rust-testing` | "cargo test", "rust test", "#[test]", "proptest", "mockall" |
 | `frontend-patterns` | Editing `.svelte`; "svelte", "sveltekit", "runes" |
-| `web-patterns` | Editing `.css`/`.html`/`.ts`/`.tsx`/`.vue`; "css units", "component composition", "url state" — the framework-agnostic web lane |
+| `web-patterns` | Editing `.css`/`.svelte`/`.ts`/`.tsx`/`.html`/`.vue`; "css units", "component composition", "url state" — the framework-agnostic web lane |
 | `web-security` | "csp", "xss", "security headers", "sri", "csrf" |
 | `web-performance` | "core web vitals", "lighthouse", "bundle size", "LCP", "CLS" |
 | `e2e-testing` | "playwright", "e2e test", "visual regression" |
@@ -31,7 +31,7 @@ Each skill is one tight file: an opinion table plus the handful of rules that ov
 /plugin install strunk@buvis-plugins
 ```
 
-Restart Claude Code. The skills auto-trigger from file extensions and conversation keywords - you don't have to invoke anything by name.
+Restart Claude Code. Skills are model-invoked from the trigger phrases and file-edit cues in each description below — firing isn't guaranteed, so invoke a skill by name if it doesn't trigger on its own.
 
 ### Update
 

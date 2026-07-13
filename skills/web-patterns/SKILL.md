@@ -1,6 +1,6 @@
 ---
 name: web-patterns
-description: Use when building framework-agnostic web UI - CSS, semantic HTML, component composition, state, and data fetching. Triggers on .css/.svelte/.ts/.tsx/.html/.vue file edits, "css units", "web patterns", "component composition", "url state".
+description: Use when building framework-agnostic web UI - CSS, semantic HTML, component composition, state, and data fetching. Triggers on .css/.svelte/.ts/.tsx/.jsx/.html/.vue file edits, "css units", "web patterns", "component composition", "url state".
 ---
 
 # Web Patterns

@@ -1,6 +1,6 @@
 ---
 name: web-security
-description: Use when writing or reviewing web security - CSP, XSS, security headers, third-party scripts, and form abuse. Triggers on "csp", "xss", "security headers", "sri", "csrf", "web security".
+description: Use when writing or reviewing web security - CSP, XSS, security headers, third-party scripts, and form abuse. Triggers on .css/.svelte/.ts/.tsx/.jsx/.html/.vue file edits, "csp", "xss", "security headers", "sri", "csrf", "web security".
 ---
 
 # Web Security

@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "strunk",
-      "description": "Idiomatic patterns and disciplined testing for Python, Rust, and Svelte",
+      "description": "Idiomatic patterns and disciplined testing for Python, Rust, and the web",
       "version": "0.2.0",
       "author": {
         "name": "buvis"

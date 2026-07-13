@@ -1,6 +1,6 @@
 ---
 name: web-performance
-description: Use when optimizing web performance - Core Web Vitals, bundle budgets, loading strategy, images, and fonts. Triggers on "core web vitals", "lighthouse", "bundle size", "LCP", "CLS", "web performance".
+description: Use when optimizing web performance - Core Web Vitals, bundle budgets, loading strategy, images, and fonts. Triggers on .css/.svelte/.ts/.tsx/.jsx/.html/.vue file edits, "core web vitals", "lighthouse", "bundle size", "LCP", "CLS", "web performance".
 ---
 
 # Web Performance

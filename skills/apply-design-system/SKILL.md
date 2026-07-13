@@ -1,6 +1,6 @@
 ---
 name: apply-design-system
-description: Use when generating a design system, auditing visual consistency, or checking for generic AI-design patterns. Three modes (generate tokens, UI scoring, slop detection). Triggers on frontend file edits, "design system", "visual audit", "slop check".
+description: Use when generating a design system, auditing visual consistency, or checking for generic AI-design patterns. Triggers on .css/.svelte/.ts/.tsx/.jsx/.html/.vue file edits, "design system", "visual audit", "slop check".
 ---
 
 # Apply Design System
