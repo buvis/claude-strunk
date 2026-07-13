@@ -17,3 +17,6 @@ htmlcov/
 
 # Working documents
 dev/local/
+
+# Serena
+.serena/
