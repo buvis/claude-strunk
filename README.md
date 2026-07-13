@@ -15,7 +15,7 @@ Code-craft skills for [Claude Code](https://claude.ai/code). Idiomatic patterns 
 | `rust-patterns` | Editing Rust; "idiomatic rust", "rust best practices" |
 | `rust-testing` | "cargo test", "rust test", "#[test]", "proptest", "mockall" |
 | `frontend-patterns` | Editing `.svelte`; "svelte", "sveltekit", "runes" |
-| `web-patterns` | Editing `.css`/`.svelte`/`.ts`/`.tsx`/`.html`/`.vue`; "css units", "component composition", "url state" — the framework-agnostic web lane |
+| `web-patterns` | Editing `.css`/`.svelte`/`.ts`/`.tsx`/`.jsx`/`.html`/`.vue`; "css units", "component composition", "url state" — the framework-agnostic web lane |
 | `web-security` | "csp", "xss", "security headers", "sri", "csrf" |
 | `web-performance` | "core web vitals", "lighthouse", "bundle size", "LCP", "CLS" |
 | `e2e-testing` | "playwright", "e2e test", "visual regression" |
