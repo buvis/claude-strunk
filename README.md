@@ -16,11 +16,11 @@ Code-craft skills for [Claude Code](https://claude.ai/code). Idiomatic patterns 
 | `rust-testing` | "cargo test", "rust test", "#[test]", "proptest", "mockall" |
 | `frontend-patterns` | Editing `.svelte`; "svelte", "sveltekit", "runes" |
 | `web-patterns` | Editing `.css`/`.svelte`/`.ts`/`.tsx`/`.jsx`/`.html`/`.vue`; "css units", "component composition", "url state" — the framework-agnostic web lane |
-| `web-security` | "csp", "xss", "security headers", "sri", "csrf" |
-| `web-performance` | "core web vitals", "lighthouse", "bundle size", "LCP", "CLS" |
+| `web-security` | Editing `.css`/`.svelte`/`.ts`/`.tsx`/`.jsx`/`.html`/`.vue`; "csp", "xss", "security headers", "sri", "csrf" |
+| `web-performance` | Editing `.css`/`.svelte`/`.ts`/`.tsx`/`.jsx`/`.html`/`.vue`; "core web vitals", "lighthouse", "bundle size", "LCP", "CLS" |
 | `e2e-testing` | "playwright", "e2e test", "visual regression" |
 | `check-python-compat` | "check python compat", "python 3.10 compatible" |
-| `apply-design-system` | Editing frontend files; "design system", "visual audit", "slop check" — framework-agnostic counterpart to `frontend-patterns` |
+| `apply-design-system` | Editing `.css`/`.svelte`/`.ts`/`.tsx`/`.jsx`/`.html`/`.vue`; "design system", "visual audit", "slop check" — framework-agnostic counterpart to `frontend-patterns` |
 
 Each skill is one tight file: an opinion table plus the handful of rules that override a model default or flag a real trap. No textbook restatement of things Claude already does. (`check-python-compat` keeps a version-compatibility reference table, the one place a lookup table earns its keep.)
 

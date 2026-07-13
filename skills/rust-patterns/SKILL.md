@@ -11,9 +11,9 @@ Pick a side. These are the rulings, not a tutorial.
 
 | Rule | Why |
 |------|-----|
-| Borrow, don't clone | Pass `&T` unless you must own. |
+| Borrow, don't clone | Pass `&T` unless you must own. Never clone to satisfy the borrow checker without understanding the root cause. |
 | Make illegal states unrepresentable | Model only valid states with enums. |
-| `?` over `unwrap()` | Propagate; never panic in production paths. |
+| `?` over `unwrap()` | Propagate; never panic in production paths. Reserve `unwrap()`/`expect()` for tests and truly unreachable states. |
 | Parse, don't validate | Convert unstructured input to typed structs at the boundary. |
 | Newtype for type safety | Wrap primitives so arguments can't be swapped. |
 | Iterators over loops | Declarative chains are clearer and often faster. |

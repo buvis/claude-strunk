@@ -11,9 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **CHANGELOG**: corrected the v0.2.0 claim that the language rulings now have "exactly one home" — the `~/.claude/rules/{python,rust,web}/` deletion was cancelled after a live probe showed rules files always attach while skills self-invoke only 1 time in 30; the rules tree remains the delivering surface until hook-based delivery lands, and strunk carries a released, portable copy.
 - **README**: stopped promising the skills "auto-trigger from file extensions" — skills are model-invoked and firing is not guaranteed; softened to describe trigger phrases honestly.
-- **web-patterns**: README and CHANGELOG extension lists now include `.svelte` and `.jsx`, matching the skill's own frontmatter.
+- **README**: the skill table's trigger lists now match each skill's frontmatter exactly (`web-patterns`, `web-security`, `web-performance`, `apply-design-system`).
 - **web-security**, **web-performance**: added a file-edit trigger (`.css`/`.svelte`/`.ts`/`.tsx`/`.jsx`/`.html`/`.vue`) — previously fired only on explicit acronyms, unlike the path-scoped rules they absorbed.
-- **apply-design-system**: replaced the vague "frontend file edits" trigger with an explicit extension list.
+- **apply-design-system**: replaced the vague "frontend file edits" trigger with an explicit extension list, and restored the mode keywords ("design tokens", "UI scoring") the char cap had squeezed out.
+- **rust-patterns**: restored two rulings thinned in migration — never clone to satisfy the borrow checker without understanding the root cause; reserve `unwrap()`/`expect()` for tests and truly unreachable states.
 
 ### Changed
 
