@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **web-patterns**: the framework-agnostic web lane strunk was missing. CSS units (never px for sizing), design tokens as custom properties, compositor-only animation, semantic HTML, component composition, state management, and data fetching. Fires on `.css`/`.html`/`.ts`/`.tsx`/`.vue` edits — the ground `frontend-patterns` (Svelte-only) never covered.
+- **web-security**: nonce-based CSP, security headers, XSS, third-party scripts and SRI, form CSRF and rate limiting.
+- **web-performance**: Core Web Vitals targets, bundle budgets, loading strategy, image and font rules.
+
+### Changed
+
+- **python-patterns**, **python-testing**, **rust-patterns**, **rust-testing**, **e2e-testing**, **apply-design-system**, **frontend-patterns**: absorbed the language guidance that previously lived in a parallel `~/.claude/rules/{python,rust,web}/` tree, so each topic now has exactly one home. New ground includes the Python toolchain and security rulings, the Rust naming table, module layout, `&str`/`&[T]` parameter and `Send + Sync` repository rulings, the cargo command reference, the macOS/maturin codesign trap, the "what to test, in priority order" list, and the design quality gate (4 of 10 required qualities). `apply-design-system` and `e2e-testing` gained triggers so the absorbed lanes are reachable.
+
 ## [0.1.4] - 2026-07-13
 
 ### Changed

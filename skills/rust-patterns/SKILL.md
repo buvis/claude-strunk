@@ -1,6 +1,6 @@
 ---
 name: rust-patterns
-description: Use when writing, reviewing, or refactoring Rust code. Covers ownership, error handling, traits, concurrency, and project structure. Triggers on Rust file edits, "idiomatic rust", "rust best practices".
+description: Use when writing, reviewing, or refactoring Rust code. Covers ownership, errors, traits, naming, module layout, toolchain, security, and platform traps. Triggers on Rust file edits, "idiomatic rust", "cargo audit", "unsafe", "maturin".
 ---
 
 # Rust Patterns
@@ -33,3 +33,42 @@ Pick a side. These are the rulings, not a tutorial.
 ## Unsafe
 
 Every `unsafe` block gets a `// SAFETY:` comment above it stating the invariant and why it holds. No comment, no merge.
+
+- Minimise `unsafe`; reach for a safe abstraction first.
+- Never use `unsafe` to get past the borrow checker for convenience.
+- Audit every `unsafe` block during review.
+
+## Toolchain
+
+`cargo fmt` before every commit; `cargo clippy -- -D warnings` (warnings are errors). 4-space indent, 100-column max — both rustfmt defaults worth stating because a 120-col override is the usual drift.
+
+## Naming
+
+| Kind | Case |
+|------|------|
+| functions, methods, variables, modules, crates | `snake_case` |
+| types, traits, enums, type parameters | `PascalCase` |
+| constants, statics | `SCREAMING_SNAKE_CASE` |
+| lifetimes | short lowercase (`'a`, `'de`) |
+
+Organize modules by **domain, not by type** — `auth/`, `orders/`, `db/`, each with its own `mod.rs`. Never a `models/` + `services/` + `handlers/` split.
+
+## API surface
+
+- `let` by default; `let mut` only where mutation is required.
+- Take `&str`, not `String`; `&[T]`, not `Vec<T>` — in function parameters. "Pass `&T`" is not enough: `&String` and `&Vec<T>` still force the caller to own a heap allocation you never needed.
+- `impl Into<String>` for constructors that must own a `String` — callers pass `&str` or `String` and neither allocates twice.
+- Add context on the way up: `.with_context(|| format!("failed to read {path}"))?`. An error without the path it failed on is a bug report you cannot action.
+- **Sealed traits** — put a `Sealed` supertrait in a private module to block external implementations of a trait you must stay free to extend.
+- A repository is a **trait**, and it carries `Send + Sync` the moment it crosses a thread or an async runtime — which, for a repository, is always. `pub trait OrderRepository: Send + Sync`.
+
+## Security
+
+- Secrets come from the environment (`std::env::var`), never a `const` in source.
+- Parameterized queries only: `sqlx::query("... WHERE name = $1").bind(&name)`. Never `format!` a value into SQL.
+- `cargo audit` (known CVEs), `cargo deny check` (licenses + advisories), `cargo tree -d` (duplicate deps).
+- Never return internal paths, stack traces, or database errors to a client. Log the detail server-side; return a generic message.
+
+## Platform traps
+
+**macOS + maturin:** after building a `.so`, `syspolicyd` can block it silently — Python hangs on import, then dies by SIGKILL with no error. Fix: `codesign -f -s - path/to/_core.*.so` after the build. When a native extension import hangs, check code signing first.

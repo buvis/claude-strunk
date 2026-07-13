@@ -26,7 +26,7 @@ let { items, variant = 'default' }: Props = $props()
 
 ## Data loading
 
-- Server `load` in `+page.server.ts` for data; **form actions with `<form method="POST" use:enhance>`** for mutations, not hand-rolled client `fetch`. Native forms survive JS failures.
+- Server `load` in `+page.server.ts` for data; **form actions with `<form method="POST" use:enhance>`** for mutations, not hand-rolled client `fetch` — reach for `superforms` once the form grows real validation. Native forms survive JS failures.
 - Stream slow data by returning unresolved promises from `load` and awaiting them in `{#await}`.
 
 ## Performance & a11y (non-negotiable)

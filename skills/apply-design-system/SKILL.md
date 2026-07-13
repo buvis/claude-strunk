@@ -1,6 +1,6 @@
 ---
 name: apply-design-system
-description: Use when generating a design system, auditing visual consistency, or checking for generic AI-design patterns. Three modes (generate tokens, UI scoring 0-10, slop detection). Triggers on "design system", "visual audit", "slop check".
+description: Use when generating a design system, auditing visual consistency, or checking for generic AI-design patterns. Three modes (generate tokens, UI scoring, slop detection). Triggers on frontend file edits, "design system", "visual audit", "slop check".
 ---
 
 # Apply Design System
@@ -36,9 +36,31 @@ The axes that earn their keep:
 
 Flag and kill the generic AI-design tells:
 
-- Purple-to-blue gradient as the default on everything.
+- Clichéd colour schemes — the purple-to-blue gradient on white above all.
 - Glassmorphism cards with no depth purpose.
 - Rounded corners on elements that read as flat (tables, code blocks).
 - Scroll-triggered animation that delays the content.
 - Centered hero text over a stock gradient.
 - A personality-free sans stack picked by default.
+- Default card grids: uniform spacing, no hierarchy.
+- Unmodified library defaults passed off as finished design.
+- Flat layouts with no layering, depth, or motion.
+- Uniform radius, spacing, and shadows across every component.
+- Dashboard-by-numbers: sidebar + cards + charts with no point of view.
+- Safe gray-on-white with one decorative accent colour.
+
+## Required qualities (at least 4 of 10)
+
+Every meaningful surface demonstrates **at least four**:
+
+1. Hierarchy through scale contrast. 2. Intentional spacing rhythm, not uniform padding. 3. Depth via overlap, shadow, surface, or motion. 4. Typography with a real pairing strategy. 5. Colour used semantically, not decoratively. 6. Hover/focus/active states that feel designed. 7. Grid-breaking editorial or bento composition where it fits. 8. Texture, grain, or atmosphere when it suits the direction. 9. Motion that clarifies flow. 10. Data visualisation treated as part of the system.
+
+Fewer than four is a fail, not a style opinion.
+
+## Before writing frontend code
+
+Pick a specific style direction — "clean minimal" is not one. Worth considering: editorial/magazine, neo-brutalism, glassmorphism with real depth, dark or light luxury with disciplined contrast, bento, scrollytelling, 3D integration, Swiss/International, retro-futurism. **Do not default to dark mode** — choose what the product wants.
+
+Define the palette deliberately. Choose type deliberately: **not Arial, Inter, or Roboto**. Every token is a CSS variable.
+
+Ship checklist: does it avoid looking like a default Tailwind or shadcn template? Are hover/focus/active states intentional? Is there hierarchy rather than uniform emphasis? Would it look believable in a real product screenshot? If both themes exist, do both feel intentional?

@@ -15,3 +15,27 @@ TDD: failing test first, then the code. Unit tests in a `#[cfg(test)] mod tests`
 - **Benchmarks:** `criterion`, and wrap inputs in `std::hint::black_box(...)` so the optimizer can't delete the work you're measuring. (`criterion::black_box` is deprecated since criterion 0.6; `std::hint::black_box` is stable from Rust 1.66.)
 - **Coverage:** `cargo llvm-cov --fail-under-lines 80` in CI (install via `taiki-e/install-action`).
 - **Doc-tests** are tests: every public example in `///` must compile and run. Mark non-running examples `no_run` or `ignore` deliberately, not by accident.
+
+## Layout
+
+```text
+src/lib.rs          # unit tests in #[cfg(test)] mod tests
+tests/api_test.rs   # integration: each file is its own binary
+tests/common/mod.rs # shared test helpers
+benches/            # criterion benchmarks
+```
+
+Name a test for the rule it enforces: `creates_user_with_valid_email`, `rejects_order_when_insufficient_stock`, `returns_none_when_not_found`. Never `test_user`.
+
+## Commands
+
+```bash
+cargo test                  # all
+cargo test -- --nocapture   # show println output
+cargo test <name>           # pattern match
+cargo test --lib            # unit only
+cargo test --test api_test  # one integration binary
+cargo test --doc            # doc-tests only
+cargo llvm-cov              # coverage summary
+cargo llvm-cov --html       # browsable report
+```

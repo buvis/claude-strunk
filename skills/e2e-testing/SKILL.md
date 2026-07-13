@@ -1,6 +1,6 @@
 ---
 name: e2e-testing
-description: Use when writing Playwright E2E tests. Covers Page Object Model, config, CI/CD, artifacts, and flaky test strategies. Triggers on "playwright", "e2e test".
+description: Use when writing Playwright E2E tests or deciding what to test in a web UI. Covers Page Object Model, config, CI/CD, artifacts, flaky tests, and test priority. Triggers on "playwright", "e2e test", "visual regression".
 ---
 
 # E2E Testing
@@ -14,6 +14,16 @@ Playwright. Stable beats clever. Pick a side.
 - **Page Object Model.** Selectors and actions live in a page class; specs read as intent. One class per page/screen.
 - **Retries and `forbidOnly` on CI only.** Retries mask flake locally where you should be fixing it.
 - **Trace `on-first-retry`, screenshot/video `*-on-failure`.** Artifacts cost nothing until something breaks.
+
+## What to test, in priority order
+
+1. **Visual regression** — screenshot 320 / 768 / 1024 / 1440. Cover heroes, scrollytelling, and every meaningful state. Both themes if both exist.
+2. **Accessibility** — automated checks, keyboard navigation, reduced-motion, colour contrast.
+3. **Performance** — Lighthouse against real pages; hold the CWV targets from the `web-performance` skill.
+4. **Cross-browser** — Chrome, Firefox, Safari minimum; check scrolling, motion, and fallbacks.
+5. **Responsive** — 320 / 375 / 768 / 1024 / 1440 / 1920. No overflow, touch works.
+
+Unit-test utilities, data transforms, and store logic. For highly visual components, visual regression carries more signal than brittle markup assertions — but it supplements coverage targets, it does not replace them.
 
 ## Page Object Model
 
